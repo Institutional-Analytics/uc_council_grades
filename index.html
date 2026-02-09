@@ -686,7 +686,7 @@
         </div>
 
         <div class="definition-box" style="margin: 0 0 20px 0;">
-            <strong>Note:</strong> Only courses with at least 50 graded students are included. Rates are calculated from all non-registered outcomes (passed + failed + withdrawn).
+            <strong>Note:</strong> Only courses with at least 50 graded students are included.
         </div>
 
         <div class="stats-grid">
@@ -745,7 +745,7 @@
         <h3 class="section-title" style="margin-top: 50px;">Instructor Analysis</h3>
 
         <div class="definition-box" style="margin: 0 0 20px 0;">
-            <strong>Note:</strong> Only instructors with at least 50 graded students in Fall 2025-2026 are shown. Fail rate = failed / (passed + failed + withdrawn).
+            <strong>Note:</strong> Only instructors with at least 50 graded students in Fall 2025-2026 are shown.
         </div>
 
         <div class="charts-section">
@@ -773,6 +773,27 @@
                 <h3>Top 5 Instructors by Fail Rate — SoBU</h3>
                 <p class="chart-description">Highest fail rates among SoBU instructors</p>
                 <canvas id="instrSoBU"></canvas>
+            </div>
+        </div>
+
+        <!-- Historical Analysis -->
+        <h3 class="section-title" style="margin-top: 50px;">Historical Analysis (5-Year Trends)</h3>
+
+        <div class="definition-box" style="margin: 0 0 20px 0;">
+            <strong>Note:</strong> Courses and instructors shown below have had fail rates ≥ 20% in at least 3 of the last 5 Fall semesters (min 50 students per semester for courses, min 30 for instructors).
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-container full-width">
+                <h3>Historically Struggling Courses — 5-Year Fail Rate Trends</h3>
+                <p class="chart-description">Top 10 courses with persistently high fail rates across Fall semesters. These are systemic issues, not one-off problems.</p>
+                <canvas id="historicalCoursesChart"></canvas>
+            </div>
+
+            <div class="chart-container full-width">
+                <h3>Consistently High-Fail Instructors — 5-Year Average Fail Rate</h3>
+                <p class="chart-description">Top instructors with persistently high fail rates across Fall semesters (min 30 students per semester).</p>
+                <canvas id="historicalInstructorsChart"></canvas>
             </div>
         </div>
 
@@ -1763,6 +1784,124 @@
             [20.2, 18.3, 17.9, 17.5, 16.7],
             [8.1, 7.9, 11.3, 12.7, 8.3]
         );
+
+        // ========== HISTORICAL ANALYSIS CHARTS ==========
+
+        // Historically Struggling Courses (horizontal bar - avg fail rate over 5 years)
+        new Chart(document.getElementById('historicalCoursesChart').getContext('2d'), {
+            type: 'bar',
+            plugins: [ChartDataLabels],
+            data: {
+                labels: [
+                    'EENG250 — SoEN (3,867 students, 5/5 semesters)',
+                    'PHAR400 — SoPH (1,995 students, 5/5 semesters)',
+                    'EENG440 — SoEN (651 students, 4/5 semesters)',
+                    'NUTR351 — SoAS (1,153 students, 5/5 semesters)',
+                    'EENG385 — SoEN (650 students, 3/5 semesters)',
+                    'MENG250 — SoEN (2,187 students, 5/5 semesters)',
+                    'EENG300 — SoEN (2,819 students, 5/5 semesters)',
+                    'NUTR411 — SoAS (723 students, 4/5 semesters)',
+                    'PHAR420 — SoPH (1,891 students, 4/5 semesters)',
+                    'PHAR505 — SoPH (1,687 students, 5/5 semesters)'
+                ],
+                datasets: [{
+                    label: '5-Year Avg Fail Rate',
+                    data: [27.1, 26.9, 26.9, 26.2, 26.1, 25.9, 25.7, 24.7, 22.9, 22.7],
+                    backgroundColor: [
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(192, 57, 43, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(52, 152, 219, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(52, 152, 219, 0.85)',
+                        'rgba(192, 57, 43, 0.85)',
+                        'rgba(192, 57, 43, 0.85)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        formatter: (v) => v.toFixed(1) + '%',
+                        font: { weight: 'bold', size: 11 }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 35,
+                        ticks: { callback: (v) => v + '%' }
+                    },
+                    y: {
+                        ticks: { font: { size: 11 } }
+                    }
+                }
+            }
+        });
+
+        // Consistently High-Fail Instructors (horizontal bar - avg fail rate over 5 years)
+        new Chart(document.getElementById('historicalInstructorsChart').getContext('2d'), {
+            type: 'bar',
+            plugins: [ChartDataLabels],
+            data: {
+                labels: [
+                    'F. Fayad — SoEN (394 students, 5/5 semesters)',
+                    'J. Ayoub — SoAS (679 students, 5/5 semesters)',
+                    'F. Hjeij — SoEN (397 students, 4/5 semesters)',
+                    'R. El Majzoub — SoPH (664 students, 5/5 semesters)',
+                    'H. Kassem — SoEN (885 students, 4/5 semesters)',
+                    'M. Krisht — SoEN (693 students, 5/5 semesters)',
+                    'F. Sakr — SoPH (1,068 students, 4/5 semesters)',
+                    'H. Hammoud — SoED (776 students, 5/5 semesters)',
+                    'R. Baalbaki — SoPH (1,105 students, 4/5 semesters)'
+                ],
+                datasets: [{
+                    label: '5-Year Avg Fail Rate',
+                    data: [31.7, 28.2, 27.8, 26.0, 25.6, 24.4, 23.6, 23.5, 23.0],
+                    backgroundColor: [
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(52, 152, 219, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(192, 57, 43, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(192, 57, 43, 0.85)',
+                        'rgba(155, 89, 182, 0.85)',
+                        'rgba(192, 57, 43, 0.85)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        formatter: (v) => v.toFixed(1) + '%',
+                        font: { weight: 'bold', size: 11 }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 40,
+                        ticks: { callback: (v) => v + '%' }
+                    },
+                    y: {
+                        ticks: { font: { size: 11 } }
+                    }
+                }
+            }
+        });
 
         </script>
 </body>
