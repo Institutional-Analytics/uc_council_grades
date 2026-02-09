@@ -357,36 +357,54 @@
             <p>How are students doing overall? GPA trends, school comparisons, and cumulative vs current semester performance.</p>
         </div>
 
-        <div class="stats-grid">
+        <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
             <div class="stat-card success">
-                <h3>Good Standing (Current Semester GPA ≥ 2.0)</h3>
-                <div class="value">68.8%</div>
-                <div class="sub-value">19,972 students</div>
-            </div>
-            <div class="stat-card success">
-                <h3>Good Standing (Cumulative GPA ≥ 2.0)</h3>
-                <div class="value">77.6%</div>
-                <div class="sub-value">22,772 students</div>
+                <h3>Good Standing (GPA ≥ 2.0)</h3>
+                <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">Current Semester</div>
+                        <div class="value" style="font-size: 1.8em;">68.8%</div>
+                        <div class="sub-value">19,972 students</div>
+                    </div>
+                    <div style="border-left: 1px solid #e0e0e0;"></div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">Cumulative</div>
+                        <div class="value" style="font-size: 1.8em;">77.6%</div>
+                        <div class="sub-value">22,772 students</div>
+                    </div>
+                </div>
             </div>
             <div class="stat-card warning">
-                <h3>Academic Probation (Current Semester GPA < 2.0)</h3>
-                <div class="value">31.2%</div>
-                <div class="sub-value">9,058 students</div>
-            </div>
-            <div class="stat-card warning">
-                <h3>Academic Probation (Cumulative GPA < 2.0)</h3>
-                <div class="value">22.4%</div>
-                <div class="sub-value">6,566 students</div>
+                <h3>Academic Probation (GPA < 2.0)</h3>
+                <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">Current Semester</div>
+                        <div class="value" style="font-size: 1.8em;">31.2%</div>
+                        <div class="sub-value">9,058 students</div>
+                    </div>
+                    <div style="border-left: 1px solid #e0e0e0;"></div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">Cumulative</div>
+                        <div class="value" style="font-size: 1.8em;">22.4%</div>
+                        <div class="sub-value">6,566 students</div>
+                    </div>
+                </div>
             </div>
             <div class="stat-card">
-                <h3>Average Current Semester GPA</h3>
-                <div class="value">2.42</div>
-                <div class="sub-value">Fall 2025-26 Semester</div>
-            </div>
-            <div class="stat-card">
-                <h3>Average Cumulative GPA</h3>
-                <div class="value">2.59</div>
-                <div class="sub-value">Career GPA - Fall 2025-26</div>
+                <h3>Average GPA</h3>
+                <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">Current Semester</div>
+                        <div class="value" style="font-size: 1.8em;">2.42</div>
+                        <div class="sub-value">Fall 2025-26</div>
+                    </div>
+                    <div style="border-left: 1px solid #e0e0e0;"></div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">Cumulative</div>
+                        <div class="value" style="font-size: 1.8em;">2.59</div>
+                        <div class="sub-value">Fall 2025-26</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -399,8 +417,8 @@
             </div>
 
             <div class="chart-container">
-                <h3>Good Standing vs Probation by School (Current Semester)</h3>
-                <p class="chart-description">Percentage of students in good standing per school</p>
+                <h3>Current Semester GPA ≥ 2.0 Rate by School</h3>
+                <p class="chart-description">Includes all students with current semester GPA ≥ 2.0 (both stable good standing and improving)</p>
                 <canvas id="schoolStandingChart"></canvas>
             </div>
 
