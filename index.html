@@ -293,7 +293,7 @@
             <h2>Executive Summary</h2>
             <ul>
                 <li><strong>Total Students:</strong> 29,338 students enrolled in Fall 2025-2026</li>
-                <li><strong>Total Course Grades:</strong> 139,177 grades recorded across all courses</li>
+                <li><strong>Total Course Grades:</strong> 139,083 grades recorded across all courses</li>
                 <li class="success"><strong>Good Academic Standing:</strong> 77.6% of students (22,772) have cumulative GPA ≥ 2.0</li>
                 <li class="warning"><strong>Academic Probation:</strong> 22.4% of students (6,566) have cumulative GPA < 2.0</li>
                 <li><strong>Course Pass Rate:</strong> 84.2% of course grades resulted in passing</li>
@@ -608,7 +608,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Course Grades</h3>
-                <div class="value">139,177</div>
+                <div class="value">139,083</div>
                 <div class="sub-value">Fall 2025-2026</div>
             </div>
             <div class="stat-card success">
@@ -623,7 +623,7 @@
             </div>
             <div class="stat-card warning">
                 <h3>Fail Rate</h3>
-                <div class="value">7.98%</div>
+                <div class="value">7.99%</div>
                 <div class="sub-value">11,107 failed grades (F/Fail)</div>
             </div>
             <div class="stat-card warning">
@@ -636,7 +636,7 @@
         <div class="charts-section">
             <div class="chart-container">
                 <h3>Letter Grade Distribution - Fall 2025-2026</h3>
-                <p class="chart-description">Distribution of grades across all courses (139,177 total)</p>
+                <p class="chart-description">Distribution of grades across all courses (139,083 total)</p>
                 <canvas id="gradeDistChart"></canvas>
             </div>
 
@@ -1527,7 +1527,7 @@
                     datalabels: {
                         anchor: 'end',
                         align: 'top',
-                        formatter: (value) => ((value / 139177) * 100).toFixed(1) + '%',
+                        formatter: (value) => ((value / 139083) * 100).toFixed(1) + '%',
                         font: { size: 9 }
                     }
                 },
@@ -1744,7 +1744,20 @@
                         },
                         y: {
                             stacked: true,
-                            ticks: { font: { size: 11 } }
+                            ticks: {
+                                font: function(context) {
+                                    if (context.tick && Array.isArray(context.tick.label)) {
+                                        return { size: 10, weight: 'bold' };
+                                    }
+                                    return { size: 9 };
+                                },
+                                color: function(context) {
+                                    if (context.tick && Array.isArray(context.tick.label)) {
+                                        return ['#2c3e50', '#7f8c8d'];
+                                    }
+                                    return '#2c3e50';
+                                }
+                            }
                         }
                     },
                     plugins: {
@@ -1760,27 +1773,27 @@
         }
 
         createInstructorChart('instrSoAS',
-            ['H. Ramadan (1 course, 102 students)', 'S. Haidar (4 courses, 158 students)', 'S. Nasser (6 courses, 93 students)', 'J. Ayoub (3 courses, 95 students)', 'R. Mrad (4 courses, 128 students)'],
+            [['H. Ramadan (3 sections, 102 students)', 'CSCI200'], ['S. Haidar (5 sections, 158 students)', 'FDSC460, NUTR351, NUTR475, NUTR495'], ['S. Nasser (6 sections, 93 students)', 'MATH160, MATH305, MATH375, MATH420'], ['J. Ayoub (5 sections, 95 students)', 'NUTR411, NUTR475, NUTR485'], ['R. Mrad (5 sections, 128 students)', 'CHEM160, CHEM200, CHEM200L, CHEM310']],
             [30.4, 30.4, 29.0, 28.4, 26.6],
             [11.8, 4.4, 26.9, 3.2, 11.7]
         );
         createInstructorChart('instrSoEN',
-            ['F. Fayad (3 courses, 76 students)', 'M. Al Zein (3 courses, 59 students)', 'I. El Moussawi (3 courses, 59 students)', 'M. Saied (3 courses, 76 students)', 'H. Kassem (4 courses, 149 students)'],
+            [['F. Fayad (3 sections, 76 students)', 'EENG250, EENG300, EENG410'], ['M. Al Zein (3 sections, 59 students)', 'EENG250, EENG300, EENG495'], ['I. El Moussawi (3 sections, 59 students)', 'EENG300, EENG400, EENG410'], ['M. Saied (3 sections, 76 students)', 'EENG250, EENG435, EENG440'], ['H. Kassem (6 sections, 149 students)', 'EENG250, EENG300, EENG611, EENG691']],
             [31.6, 23.7, 23.7, 23.7, 20.1],
             [15.8, 13.6, 10.2, 11.8, 12.1]
         );
         createInstructorChart('instrSoPH',
-            ['R. Sabra (2 courses, 99 students)', 'S. Almasri (1 course, 72 students)', 'N. Chamsine (2 courses, 59 students)', 'M. Al Khatib (2 courses, 157 students)', 'G. Sonji (2 courses, 216 students)'],
+            [['R. Sabra (3 sections, 99 students)', 'PHAR400, PHAR510'], ['S. Almasri (2 sections, 72 students)', 'PHAR515'], ['N. Chamsine (2 sections, 59 students)', 'PHAR200, PHAR300'], ['M. Al Khatib (5 sections, 157 students)', 'PHAR300, PHAR410'], ['G. Sonji (6 sections, 216 students)', 'PHAR400, PHAR407']],
             [37.4, 31.9, 28.8, 28.7, 26.4],
             [2.0, 2.8, 1.7, 3.2, 3.7]
         );
         createInstructorChart('instrSoED',
-            ['E. Berberi (5 courses, 70 students)', 'N. Chall (3 courses, 67 students)', 'M. Hankir Antar (4 courses, 142 students)', 'F. Hussein (1 course, 50 students)', 'M. Arja (4 courses, 65 students)'],
+            [['E. Berberi (5 sections, 70 students)', 'EDUC201, EDUC302, EDUC401, ENGL151'], ['N. Chall (4 sections, 67 students)', 'TRNS300, TRNS301, TRNS404'], ['M. Hankir Antar (4 sections, 142 students)', 'ENGL101, ENGL151, ENGL201, ENGL251'], ['F. Hussein (1 section, 50 students)', 'ARAB200'], ['M. Arja (4 sections, 65 students)', 'ENGL151, ENGL202, ENGL203, ENGL306']],
             [24.3, 23.9, 22.5, 22.0, 21.5],
             [4.3, 9.0, 17.6, 18.0, 7.7]
         );
         createInstructorChart('instrSoBU',
-            ['S. Hatab (1 course, 99 students)', 'M. Balouza (4 courses, 126 students)', 'D. Radwan (2 courses, 106 students)', 'W. Salloum (1 course, 63 students)', 'L. Rabih (4 courses, 72 students)'],
+            [['S. Hatab (3 sections, 99 students)', 'BACC200'], ['M. Balouza (4 sections, 126 students)', 'BECO100, BECO260, BECO301, BSTA100'], ['D. Radwan (3 sections, 106 students)', 'BMTH210, BSTA100'], ['W. Salloum (2 sections, 63 students)', 'BMTH210'], ['L. Rabih (4 sections, 72 students)', 'BMIS302, BMIS320, BMIS360, BMIS401']],
             [20.2, 18.3, 17.9, 17.5, 16.7],
             [8.1, 7.9, 11.3, 12.7, 8.3]
         );
